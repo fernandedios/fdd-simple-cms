@@ -28,10 +28,8 @@ app.use(session({
   store: new MongoStore({ url: database, autoReconnect: true })
 }));
 
-
-app.get('/', (req, res, next) => {
-  res.json('Hello World');
-});
+// route handlers
+require('./routes/mainRoutes')(app);
 
 app.listen(port, (err) => {
   if(err) console.log(err);
