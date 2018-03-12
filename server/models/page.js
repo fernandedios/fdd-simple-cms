@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const PageSchema = new Schema({
   title: String,
-  desc: String,
+  desc: { type: String, default: '' }
   body: String,
-  tags: String,
+  tags: Array,
   thumbnail: String,
   image: Array,
   language: String,
