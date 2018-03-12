@@ -1,5 +1,6 @@
 node_modules
 dev.js
+testkeys.js
 .DS_Store
 
 npm-debug.log*
