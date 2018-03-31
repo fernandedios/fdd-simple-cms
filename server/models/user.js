@@ -57,4 +57,15 @@ UserSchema.methods.generateAuthToken = function() {
     });
 };
 
+UserSchema.methods.removeToken = function(token) {
+  let user = this;
+
+  return user.update({
+    // use $pull mongodb operator
+    $pull: {
+      tokens: { token }
+    }
+  });
+};
+
 module.exports = mongoose.model('User', UserSchema);
