@@ -68,4 +68,25 @@ UserSchema.methods.removeToken = function(token) {
   });
 };
 
+/* -- model methods -- */
+UserSchema.statics.findByToken = function(token) {
+  let User = this; // uppercase User since this is a model method
+  let decoded;
+
+  // use try / catch here
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  }
+  catch(err) {
+    return Promise.reject();
+  }
+
+  // return as promise so we can tap another .then
+  return User.findOne({
+    '_id': decoded._id,
+    'tokens.token': token,
+    'tokens.access': 'auth'
+  });
+};
+
 module.exports = mongoose.model('User', UserSchema);
